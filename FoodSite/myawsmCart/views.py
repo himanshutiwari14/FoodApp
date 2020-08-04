@@ -1,19 +1,23 @@
 from django.shortcuts import render
 from django.shortcuts import HttpResponse
 from . models import Products
+import math
 def index(request):
     prod=Products.objects.all()
-    if len(prod)==1:
-        home_product_display=1
+    print(len(prod))
+    if len(prod)==0:
+        slides_required=1
 
     if len(prod)%4==0:
-        home_product_display=len(prod)//2
+        slides_required=len(prod)//4
 
-    home_product_display=(len(prod)//2)+1
+    slides_required=len(prod)// 4 + math.ceil((len(prod) / 4) - (len(prod) // 4))
+    print(slides_required,"sr")
+    all_prods=[[prod,range(1,len(prod),slides_required)],[prod,range(1,len(prod),slides_required)]]
 
-    print("here all the products are",prod)
-    print(home_product_display,"these number of the products are available rioght now")
-    return render(request,'myawsmCart/index.html')
+    params = {'all_prods':all_prods}
+   
+    return render(request,'myawsmCart/index3.html',params)
 
 def about_us(request):
     return render(request,'myawsmCart/index2.html')
