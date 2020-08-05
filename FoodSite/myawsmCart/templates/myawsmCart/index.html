@@ -39,7 +39,7 @@
   </style>
   </head>
   <body>
-  {% load static %}
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#">My Awesome Cart</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,16 +75,15 @@
     </form>
   </div>
 </nav>
-
-
-<h1>Premium Watches</h1>
+<h1>Men Watch Collection</h1>
+<!-- <h1>Creation of slides..How many sildes will create</h1> -->
 <div class="container">
 <div id="demo" class="carousel slide my-3" data-ride="carousel">
     <ul class="carousel-indicators">
       <li data-target="#demo" data-slide-to="0" class="active"></li>
-      {% for i in range %}
-      <li data-target="#demo" data-slide-to="{{i}}" ></li>
-      {% endfor %}
+      {% for i in range%}
+      <li data-target="#demo" data-slide-to={{i}} ></li>
+      {%endfor%}
     </ul>
 
     <!--Slideshow starts here -->
@@ -93,34 +92,38 @@
       <div class="carousel-item active">
         <div class="col-xs-3 col-sm-3 col-md-3">
           <div class="card" style="width: 18rem;">
-            <img src='/media/{{product.0.image}}'class="card-img-top" alt="...">
+            <img src='\media\{{actual_prodcuts.0.image}}' class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">{{product.0.product_name}}</h5>
-                <p class="card-text">{{product.0.desc}}</p>
-                <a href="#" class="btn btn-primary">Add to Cart</a>
+                <h5 class="card-title">{{actual_prodcuts.0.product_name}}</h5>
+                <p class="card-text">{{actual_prodcuts.0.desc}}</p>
+                <a href="#" class="btn btn-primary">Add TO Cart</a>
             </div>
           </div>
        </div>
-       {% for i in product|slice:"1:"%}
+     
+
+       {% for i in actual_prodcuts|slice:"1:"%}
         <div class="col-xs-3 col-sm-3 col-md-3">
           <div class="card" style="width: 18rem;">
-            <img src='/media/{{i.image}}'class="card-img-top" alt="...">
+            <img src='/media/{{i.image}}' class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">{{i.product_name}}</h5>
               <p class="card-text">{{i.desc}}</p>
-              <a href="#" class="btn btn-primary">Go to Cart</a>
+              <a href="#" class="btn btn-primary">Add To Cart</a>
             </div>
           </div>
         </div>
         {% if forloop.counter|divisibleby:3 and forloop.counter > 0 and not forloop.last %}
       </div><div class="carousel-item">
         {% endif %}
-        {% endfor %}
-      </div>
-    </div>
-  </div>
-      
 
+        {% endfor %}
+    </div>
+
+
+
+</div>
+</div>
     <!-- left and right controls for the slide -->
     <a class="carousel-control-prev" href="#demo" data-slide="prev">
         <span class="carousel-control-prev-icon"></span>
@@ -128,12 +131,9 @@
     <a class="carousel-control-next" href="#demo" data-slide="next">
         <span class="carousel-control-next-icon"></span>
     </a>
-  
-
-  </div>
 
 
-
+</div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
