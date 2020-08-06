@@ -78,31 +78,32 @@
 <h1>Men Watch Collection</h1>
 <!-- <h1>Creation of slides..How many sildes will create</h1> -->
 <div class="container">
-<div id="demo" class="carousel slide my-3" data-ride="carousel">
+  {% for products_aval, range, slides_required in all_prods %}
+  
+<div id="demo{{forloop.counter}}" class="carousel slide my-3" data-ride="carousel">
     <ul class="carousel-indicators">
-      <li data-target="#demo" data-slide-to="0" class="active"></li>
+      <li data-target="#demo{{forloop.counter}}" data-slide-to="0" class="active"></li>
       {% for i in range%}
-      <li data-target="#demo" data-slide-to={{i}} ></li>
+      <li data-target="#demo{{forloop.parentloop.counter}}" data-slide-to={{i}} ></li>
       {%endfor%}
     </ul>
 
     <!--Slideshow starts here -->
     <div class="container carousel-inner no-padding">
-
+ 
       <div class="carousel-item active">
         <div class="col-xs-3 col-sm-3 col-md-3">
           <div class="card" style="width: 18rem;">
-            <img src='\media\{{actual_prodcuts.0.image}}' class="card-img-top" alt="...">
+            <img src='\media\{{products_aval.0.image}}' class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">{{actual_prodcuts.0.product_name}}</h5>
-                <p class="card-text">{{actual_prodcuts.0.desc}}</p>
+                <h5 class="card-title">{{products_aval.0.product_name}}</h5>
+                <p class="card-text">{{products_aval.0.desc}}</p>
                 <a href="#" class="btn btn-primary">Add TO Cart</a>
             </div>
           </div>
        </div>
      
-
-       {% for i in actual_prodcuts|slice:"1:"%}
+       {% for i in products_aval|slice:"1:"%}
         <div class="col-xs-3 col-sm-3 col-md-3">
           <div class="card" style="width: 18rem;">
             <img src='/media/{{i.image}}' class="card-img-top" alt="...">
@@ -119,21 +120,20 @@
 
         {% endfor %}
     </div>
-
-
-
 </div>
 </div>
     <!-- left and right controls for the slide -->
-    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <a class="carousel-control-prev" href="#demo{{forloop.counter}}" data-slide="prev">
         <span class="carousel-control-prev-icon"></span>
     </a>
-    <a class="carousel-control-next" href="#demo" data-slide="next">
+    <a class="carousel-control-next" href="#demo{{forloop.counter}}" data-slide="next">
         <span class="carousel-control-next-icon"></span>
     </a>
+  </div>
+{%endfor%}
 
 
-</div>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
