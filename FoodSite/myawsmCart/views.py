@@ -3,18 +3,29 @@ from django.shortcuts import HttpResponse
 from . models import Products
 import math
 def index(request):
-    products_aval=Products.objects.all()
-    if len(products_aval)==1:
-        slides_required=1
-    if len(products_aval)%3==0:
-        slides_required=len(products_aval)//3
-    else:
-        slides_required=(len(products_aval)//3)+1
-    list_all_prods= [[products_aval, range(1, slides_required), slides_required],[products_aval, range(1, slides_required), slides_required]]
-    # params={"number_of_produsts":len(products_aval),"actual_prodcuts":products_aval,"range":range(1,slides_required)}
-    params={"all_prods":list_all_prods}
-    return render(request,'myawsmCart/index.html',params)
+    # products = Product.objects.all()
+    # print(products)
+    # n = len(products)
+    # nSlides = n//4 + ceil((n/4)-(n//4))
 
-def about_us(request):
-    return render(request,'myawsmCart/index2.html')
+    allProds = []
+    print("views.py aa rha hai")
+    catprods = Products.objects.values('category', 'id')
+    print(catprods)
+    cats = {item['category'] for item in catprods}
+    print("what is inside cats",cats)
+    for cat in cats:
+        print("1")
+        print(cat,"cat is")
+        prod = Products.objects.filter(category=cat)
+        print(prod,"prod is")
+        print("2")
+        n = len(prod)
+        nSlides = n // 4 + math.ceil((n / 4) - (n // 4))
+        print("3")
+        allProds.append([prod, range(1, nSlides), nSlides])
+    print("what is indise all pros",allProds)
+    params = {'allProds':allProds}
+    return render(request, 'myawsmCart/index.html', params)
+
 
